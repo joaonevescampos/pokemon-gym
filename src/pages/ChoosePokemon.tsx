@@ -8,17 +8,17 @@ const initialPokemons = [
   { name: "pichu", selected: false },
   { name: "bulbasaur", selected: false },
   { name: "charmander", selected: false },
-  { name: "squirtle", selected: false },
+  { name: "squirtle", selected: true },
 ];
 
 const ChoosePokemon = () => {
-  const [inative, setInative] = useState(true);
+  const [inactive, setinactive] = useState(true);
 
   useEffect(() => {
     const oneSelected: boolean = initialPokemons.some(
       (pokemon) => pokemon.selected === true
     );
-    setInative(!oneSelected);
+    setinactive(!oneSelected);
   }, [initialPokemons]);
 
   return (
@@ -34,7 +34,7 @@ const ChoosePokemon = () => {
           <img src={pokebola} alt="pokebola" width={28} />
         </div>
       </header>
-      <main className="flex flex-col items-center justify-center h-screen max-lg:h-full text-white">
+      <main className="flex flex-col items-center justify-center h-[calc(100vh-48px)] max-lg:h-full text-white">
         <div className="flex flex-col gap-4">
           <section className="relative flex items-center justify-center w-full h-full pt-4">
             <div className="flex flex-col gap-4 items-center justify-center p-4 max-w-150 max-lg:max-w-120">
@@ -53,12 +53,13 @@ const ChoosePokemon = () => {
                   key={index}
                   name={pokemon.name}
                   pokemonSelected={pokemon.selected ? pokemon.name : ""}
+                  buttonText={`${pokemon.selected ? "selecionado" : "selecionar"}`}
                 />
               ))}
             </div>
             <div className="flex flex-col items-center justify-center gap-4">
-              <Button path="/my-pokemons" text="próximo" inative={inative} />
-              {inative && (
+              <Button path="/my-pokemons" text="próximo" inactive={inactive} />
+              {inactive && (
                 <p className="text-red-300 text-sm">
                   Selecione um pokemon para prosseguir!
                 </p>

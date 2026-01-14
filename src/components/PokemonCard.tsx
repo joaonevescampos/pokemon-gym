@@ -3,10 +3,14 @@ import Button from "./Button";
 
 interface PokemonCard {
   name: string;
-  pokemonSelected: string;
+  pokemonSelected?: string;
+  buttonText: string;
+  level?: number;
+  buttonPath?: string;
+  inactive?: boolean;
 }
 
-const PokemonCard = ({ name, pokemonSelected }: PokemonCard) => {
+const PokemonCard = ({ name, pokemonSelected, buttonText, buttonPath, level, inactive }: PokemonCard) => {
   const [imageURL, setImageURL] = useState("");
   const [type, setType] = useState("");
 
@@ -61,11 +65,15 @@ const PokemonCard = ({ name, pokemonSelected }: PokemonCard) => {
       >
         {type}
       </span>
+      {level && (
+        <span className="z-20 text-sm font-bold">level : {level}</span>
+      )}
       <Button
-        text={`${pokemonSelected === name ? "selecionado" : "selecionar"}`}
-        style="z-10"
+        text={buttonText}
         selected={pokemonSelected}
         pokemonName={name}
+        path={buttonPath}
+        inactive={inactive}
       />
     </section>
   );

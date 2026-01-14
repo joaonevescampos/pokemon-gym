@@ -6,7 +6,7 @@ import Button from "../components/Button";
 
 const LandingPage = () => {
   return (
-    <main className="relative bg-linear-to-tl from-gray-800 to-gray-950 flex max-lg:flex-col justify-between items-center h-full max-lg:h-full text-white overflow-x-hidden">
+    <main className="relative flex max-lg:flex-col justify-between items-center h-full max-lg:h-full text-white overflow-x-hidden">
       <section className=" flex-2 max-lg:flex-none flex items-center justify-center h-screen max-lg:h-130 w-full max-lg:overflow-x-hidden">
         <img
           src={bgPokeball}

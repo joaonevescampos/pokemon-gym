@@ -15,8 +15,9 @@
   --color-gd-grass2: #00542D;
 }
 
-html, body, main {
+html, body {
  background: linear-gradient(to bottom, #000000, #05091b);
  box-sizing: border-box;
  overflow-x: hidden;
+ height: 100%;
 }
