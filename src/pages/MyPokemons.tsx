@@ -5,7 +5,7 @@ import { usePokemon } from "../context/usePokemon";
 // import { useEffect } from "react";
 
 const MyPokemons = () => {
-  const { state, resetGame } = usePokemon();
+  const { state } = usePokemon();
   // useEffect(() => {
   //   resetGame();
   // }, []);
