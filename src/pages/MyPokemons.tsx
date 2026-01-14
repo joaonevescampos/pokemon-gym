@@ -2,7 +2,7 @@ import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
 import { Link } from "react-router-dom";
 
-const myPokemons = [{ name: "pichu", type: "electric", hp: 23, level: 2 }];
+const myPokemons = [{ name: "bulbasaur", type: "grass", hp: 23, level: 2 }];
 
 const MyPokemons = () => {
   return (

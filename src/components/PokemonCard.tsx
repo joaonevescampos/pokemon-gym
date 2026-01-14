@@ -8,9 +8,10 @@ interface PokemonCard {
   level?: number;
   buttonPath?: string;
   inactive?: boolean;
+  buttonClick?: () => void
 }
 
-const PokemonCard = ({ name, pokemonSelected, buttonText, buttonPath, level, inactive }: PokemonCard) => {
+const PokemonCard = ({ name, pokemonSelected, buttonText, buttonPath, level, inactive, buttonClick }: PokemonCard) => {
   const [imageURL, setImageURL] = useState("");
   const [type, setType] = useState("");
 
@@ -74,6 +75,7 @@ const PokemonCard = ({ name, pokemonSelected, buttonText, buttonPath, level, ina
         pokemonName={name}
         path={buttonPath}
         inactive={inactive}
+        onClick={buttonClick}
       />
     </section>
   );

@@ -4,15 +4,21 @@ import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
 import { Link } from "react-router-dom";
 
-const initialPokemons = [
-  { name: "pichu", selected: false },
-  { name: "bulbasaur", selected: false },
-  { name: "charmander", selected: false },
-  { name: "squirtle", selected: true },
-];
-
 const ChoosePokemon = () => {
   const [inactive, setinactive] = useState(true);
+  const [initialPokemons, setInitialPokemons] = useState([
+    { name: "pichu", selected: false },
+    { name: "bulbasaur", selected: false },
+    { name: "charmander", selected: false },
+    { name: "squirtle", selected: false },
+  ]);
+
+  const handleClick = (index : number) => {
+    const updateSelection = initialPokemons.map((pokemon, i) => index === i ? {...pokemon, selected: true} : {...pokemon, selected: false
+    })
+    setInitialPokemons(updateSelection)
+    //adicionar o pokemon escolhido a listagem dos meus pokemons capturados
+  }
 
   useEffect(() => {
     const oneSelected: boolean = initialPokemons.some(
@@ -53,7 +59,10 @@ const ChoosePokemon = () => {
                   key={index}
                   name={pokemon.name}
                   pokemonSelected={pokemon.selected ? pokemon.name : ""}
-                  buttonText={`${pokemon.selected ? "selecionado" : "selecionar"}`}
+                  buttonText={`${
+                    pokemon.selected ? "selecionado" : "selecionar"
+                  }`}
+                  buttonClick={() => handleClick(index)}
                 />
               ))}
             </div>
