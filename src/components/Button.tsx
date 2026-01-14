@@ -7,6 +7,7 @@ interface ButtonProps {
   inactive?: boolean;
   selected?: string;
   pokemonName?: string;
+  onClick?: () => void;
 }
 
 const Button = ({
@@ -16,8 +17,8 @@ const Button = ({
   inactive,
   selected,
   pokemonName,
+  onClick,
 }: ButtonProps) => {
-  console.log("valor do inativo: ", inactive, "valor do path ", path)
   return (
     <>
       {path && !inactive ? (
@@ -30,6 +31,17 @@ const Button = ({
             <span className=" text-sm max-lg:text-sm font-bold">{text}</span>
           </button>
         </Link>
+      ) : onClick ? (
+        <button
+          className={`flex items-center justify-center ${
+            selected ? "bg-bt-purple" : "text-black bg-white"
+          }  h-10 w-36 cursor-pointer rounded-3xl z-10 ${style} ${
+            inactive && "bg-gray-500!"
+          }`}
+          onClick={() => onClick()}
+        >
+          <span className=" text-sm max-lg:text-sm font-bold">{text}</span>
+        </button>
       ) : (
         <button
           className={`flex items-center justify-center ${
