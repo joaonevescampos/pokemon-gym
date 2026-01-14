@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "../components/Button";
-
-const myPokemons = [
-  { name: "pichu", type: "electric", hp: 43, level: 1 },
-  { name: "bulbasaur", type: "grass", hp: 10, level: 1 },
-  { name: "charmander", type: "fire", hp: 10, level: 1 },
-  { name: "squirtle", type: "squirtle", hp: 10, level: 1 },
-];
+import { usePokemon } from "../context/usePokemon";
 
 interface ChecklistType {
   task: string;
@@ -15,31 +9,41 @@ interface ChecklistType {
 }
 
 const PokemonDetail = () => {
+  const { state, gainHp } = usePokemon();
   const pokemonName = useParams().pokemonName;
   const [pokemonImage, setpokemonImage] = useState("");
+  const [pokemonData, setPokemonData] = useState({
+    name: pokemonName,
+    type: "",
+    hp: 0,
+    level: 0,
+  });
   const [checklist, setChecklist] = useState<ChecklistType[]>([
-    { task: "escreva sua tarefa aqui", checked: false }
+    { task: "escreva sua tarefa aqui", checked: false },
   ]);
 
   useEffect(() => {
-    getPokemonImage(name);
+    getPokemonInfos(pokemonName!);
   }, []);
 
-  const getPokemonImage = async (name: string) => {
+  const getPokemonInfos = async (name: string) => {
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
       const data = await response.json();
       setpokemonImage(
         `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${data.id}.png`
       );
+
+      const updatePokemonData = state.myPokemons.filter(
+        (pokemon) => pokemon.name === pokemonName
+      )[0];
+      setPokemonData(updatePokemonData);
     } catch (error) {
       console.log("cannot get pokemon image");
     }
   };
 
-  const { name, type, hp, level } = myPokemons.filter(
-    (pokemon) => pokemon.name === pokemonName
-  )[0];
+  const { name, type, hp, level } = pokemonData;
 
   const widthHP = (hp % 10) * 10;
 
@@ -64,6 +68,10 @@ const PokemonDetail = () => {
     console.log(newChecklist);
     setChecklist(newChecklist);
   };
+
+  const handleFinish = () => {
+    gainHp(name!, 1)
+  }
 
   return (
     <main className="flex max-lg:flex-col">
@@ -102,19 +110,19 @@ const PokemonDetail = () => {
           </span>
           <span className="text-sm opacity-80 font-bold">Level: {level}</span>
           <div className="h-3 rounded-4xl bg-gray-800 w-50">
-            {hp && (
-              <hr
-                className={`border-6 rounded-4xl text-green-300`}
-                style={{ width: `${widthHP}%` }}
-              />
-            )}
+            <hr
+              className={`border-6 rounded-4xl text-green-300`}
+              style={{ width: `${widthHP}%` }}
+            />
           </div>
           <span className="text-sm opacity-80 font-bold">HP: {hp}</span>
         </div>
       </section>
       <section className="flex-3 flex flex-col gap-2 items-center justify-center max-lg:flex-none px-4 py-8">
         <div className="flex flex-col gap-4 w-full max-w-150 max-lg:max-w-100">
-          <span className="text-white text-sm opacity-50 font-medium">12 de Janeiro, 2026 - segunda</span>
+          <span className="text-white text-sm opacity-50 font-medium">
+            12 de Janeiro, 2026 - segunda
+          </span>
           <p className="text-white text-center text-sm">
             Crie seu checklist do dia, conclua todas suas tarefas e veja seu
             pokemon ganhar experiência a cada dia
@@ -154,11 +162,13 @@ const PokemonDetail = () => {
             onClick={() => handleClick()}
           />
           {checklist.every((item) => item.checked) && (
-            <Button
-              text="Finalizar treino"
-              style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white! mt-8"
-              path="/"
-            />
+            <Link to="/">
+              <Button
+                text="Finalizar treino"
+                style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white! mt-8"
+                onClick={() => handleFinish()}
+              />
+            </Link>
           )}
         </div>
       </section>

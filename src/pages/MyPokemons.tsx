@@ -1,17 +1,21 @@
 import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
 import { Link } from "react-router-dom";
-
-const myPokemons = [{ name: "bulbasaur", type: "grass", hp: 23, level: 2 }];
+import { usePokemon } from "../context/usePokemon";
+// import { useEffect } from "react";
 
 const MyPokemons = () => {
+  const { state, resetGame } = usePokemon();
+  // useEffect(() => {
+  //   resetGame();
+  // }, []);
   return (
     <>
       <header className="relative w-full h-fit text-white">
         <section>
           <div className="absolute flex items-end gap-2 top-4 left-4">
-            <Link to="/" className="text-sm  font-bold opacity-70">
-              voltar
+            <Link to="/home" className="text-sm  font-bold opacity-70">
+              Pokegym
             </Link>
           </div>
           <div className="absolute flex items-end gap-2 top-4 right-4">
@@ -21,26 +25,33 @@ const MyPokemons = () => {
         </section>
         <section className="flex items-center justify-center w-full">
           <div className="flex flex-col gap-4 items-center justify-center pt-12 max-w-150 max-lg:max-w-120">
-              <h1 className="text-2xl text-center font-extrabold">
-                Meus Pokémons
-              </h1>
-              <p className="text-sm font-medium text-center">
-                Treine seu time de pokémons!
-              </p>
-            </div>
+            <h1 className="text-2xl text-center font-extrabold">
+              Meus Pokémons
+            </h1>
+            <p className="text-sm font-medium text-center">
+              Treine seu time de pokémons!
+            </p>
+          </div>
         </section>
         <section className="flex flex-col gap-2 p-4 opacity-70 text-sm">
-          <span>Pokemons capturados: 1</span>
+          <span>Pokemons capturados: {state.myPokemons.length}</span>
           <span>Pokemons treinados até a última forma: 0</span>
-          <span>Total para serem capturados: 149</span>
-          <hr className="opacity-40"/>
+          <span>Total para serem capturados: {150 - state.myPokemons.length}</span>
+          <hr className="opacity-40" />
         </section>
       </header>
       <main className="flex flex-col items-center justify-center h-[calc(100vh-233px)] max-lg:h-full max-lg:min-h-100 text-white">
         <section className="flex flex-col gap-8 items-center justify-center px-4 py-8 h-full">
           <div className="grid grid-cols-4 max-lg:grid-cols-2 gap-4 items-center justify-center text-xl h-full max-w-300 m-auto">
-            {myPokemons.map((pokemon, index) => (
-              <PokemonCard key={index} name={pokemon.name} buttonText="treinar" level={pokemon.level} buttonPath={`/pokemon/${pokemon.name}`} inactive={false}/>
+            {state.myPokemons.map((pokemon, index) => (
+              <PokemonCard
+                key={index}
+                name={pokemon.name}
+                buttonText="treinar"
+                level={pokemon.level}
+                buttonPath={`/pokemon/${pokemon.name}`}
+                inactive={false}
+              />
             ))}
           </div>
         </section>

@@ -8,10 +8,18 @@ interface PokemonCard {
   level?: number;
   buttonPath?: string;
   inactive?: boolean;
-  buttonClick?: () => void
+  buttonClick?: () => void;
 }
 
-const PokemonCard = ({ name, pokemonSelected, buttonText, buttonPath, level, inactive, buttonClick }: PokemonCard) => {
+const PokemonCard = ({
+  name,
+  pokemonSelected,
+  buttonText,
+  buttonPath,
+  level,
+  inactive,
+  buttonClick,
+}: PokemonCard) => {
   const [imageURL, setImageURL] = useState("");
   const [type, setType] = useState("");
 
@@ -66,9 +74,7 @@ const PokemonCard = ({ name, pokemonSelected, buttonText, buttonPath, level, ina
       >
         {type}
       </span>
-      {level && (
-        <span className="z-20 text-sm font-bold">level : {level}</span>
-      )}
+      <span className="z-20 text-sm font-bold opacity-70">level : {level}</span>
       <Button
         text={buttonText}
         selected={pokemonSelected}
