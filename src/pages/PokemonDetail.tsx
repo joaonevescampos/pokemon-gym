@@ -18,8 +18,7 @@ const PokemonDetail = () => {
   const pokemonName = useParams().pokemonName;
   const [pokemonImage, setpokemonImage] = useState("");
   const [checklist, setChecklist] = useState<ChecklistType[]>([
-    { task: "teste", checked: false },
-    { task: "banana", checked: false },
+    { task: "escreva sua tarefa aqui", checked: false }
   ]);
 
   useEffect(() => {
@@ -113,10 +112,10 @@ const PokemonDetail = () => {
           <span className="text-sm opacity-80 font-bold">HP: {hp}</span>
         </div>
       </section>
-      <section className="flex-3 flex flex-col gap-2 items-center justify-center max-lg:flex-none">
-        <div className="flex flex-col gap-4 max-w-72">
-          <span className="text-white">12 de Janeiro, 2026 - segunda</span>
-          <p className="text-white">
+      <section className="flex-3 flex flex-col gap-2 items-center justify-center max-lg:flex-none px-4 py-8">
+        <div className="flex flex-col gap-4 w-full max-w-150 max-lg:max-w-100">
+          <span className="text-white text-sm opacity-50 font-medium">12 de Janeiro, 2026 - segunda</span>
+          <p className="text-white text-center text-sm">
             Crie seu checklist do dia, conclua todas suas tarefas e veja seu
             pokemon ganhar experiência a cada dia
           </p>
@@ -125,7 +124,7 @@ const PokemonDetail = () => {
             text="Ver progresso mensal"
             style="w-full text-white my-8"
           />
-          <ul className="flex flex-col gap-2">
+          <ul className="flex flex-col gap-4 w-full">
             {checklist?.map((item, index) => (
               <li className="flex items-center gap-4">
                 <input
@@ -138,7 +137,7 @@ const PokemonDetail = () => {
                 />
                 <input
                   type="text"
-                  className={`w-72 h-8 bg-white rounded-3xl p-4 ${
+                  className={`w-full h-8 bg-white rounded-3xl p-4 ${
                     item.checked && "bg-bt-purple! text-white!"
                   }`}
                   defaultValue={item.task}
