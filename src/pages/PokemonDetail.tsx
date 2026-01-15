@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { usePokemon } from "../context/usePokemon";
 
@@ -22,6 +22,7 @@ const PokemonDetail = () => {
     { task: "escreva sua tarefa aqui", checked: false },
   ]);
   const [date, setDate] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPokemonInfos(pokemonName!);
@@ -73,6 +74,7 @@ const PokemonDetail = () => {
 
   const handleFinish = () => {
     gainHp(name!, 1);
+    navigate("/home");
   };
 
   const formatDate = () => {
@@ -199,13 +201,11 @@ const PokemonDetail = () => {
             onClick={() => handleClick()}
           />
           {checklist.every((item) => item.checked) && (
-            <Link to="/home">
-              <Button
-                text="Finalizar treino"
-                style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white! mt-8"
-                onClick={() => handleFinish()}
-              />
-            </Link>
+            <Button
+              text="Finalizar treino"
+              style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white! mt-8"
+              onClick={() => handleFinish()}
+            />
           )}
         </div>
       </section>
