@@ -21,9 +21,11 @@ const PokemonDetail = () => {
   const [checklist, setChecklist] = useState<ChecklistType[]>([
     { task: "escreva sua tarefa aqui", checked: false },
   ]);
+  const [date, setDate] = useState("");
 
   useEffect(() => {
     getPokemonInfos(pokemonName!);
+    formatDate();
   }, []);
 
   const getPokemonInfos = async (name: string) => {
@@ -70,8 +72,41 @@ const PokemonDetail = () => {
   };
 
   const handleFinish = () => {
-    gainHp(name!, 1)
-  }
+    gainHp(name!, 1);
+  };
+
+  const formatDate = () => {
+    const today = new Date();
+
+    const week = [
+      "domingo",
+      "segunda",
+      "terça",
+      "quarta",
+      "quinta",
+      "sexta",
+      "sábado",
+    ];
+    const month = [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
+    ];
+
+    setDate(
+      `${today.getDate()}, ${
+        month[today.getMonth()]
+      }, ${today.getFullYear()} - ${week[today.getDay()]}`
+    );
+  };
 
   return (
     <main className="flex max-lg:flex-col">
@@ -89,11 +124,13 @@ const PokemonDetail = () => {
         }`}
       >
         <div className="flex flex-col items-center gap-2 text-white">
-          <img
-            src={pokemonImage}
-            alt={pokemonName}
-            className="w-80 max-lg:w-50"
-          />
+          {pokemonImage && (
+            <img
+              src={pokemonImage}
+              alt={pokemonName}
+              className="w-80 max-lg:w-50"
+            />
+          )}
           <span className="text-2xl font-bold">{name}</span>
           <span
             className={`font-bold text-sm ${
@@ -121,7 +158,7 @@ const PokemonDetail = () => {
       <section className="flex-3 flex flex-col gap-2 items-center justify-center max-lg:flex-none px-4 py-8">
         <div className="flex flex-col gap-4 w-full max-w-150 max-lg:max-w-100">
           <span className="text-white text-sm opacity-50 font-medium">
-            12 de Janeiro, 2026 - segunda
+            {date}
           </span>
           <p className="text-white text-center text-sm">
             Crie seu checklist do dia, conclua todas suas tarefas e veja seu
@@ -134,7 +171,7 @@ const PokemonDetail = () => {
           />
           <ul className="flex flex-col gap-4 w-full">
             {checklist?.map((item, index) => (
-              <li className="flex items-center gap-4">
+              <li className="flex items-center gap-4" key={index}>
                 <input
                   type="checkbox"
                   name={`${index}`}
@@ -162,7 +199,7 @@ const PokemonDetail = () => {
             onClick={() => handleClick()}
           />
           {checklist.every((item) => item.checked) && (
-            <Link to="/">
+            <Link to="/home">
               <Button
                 text="Finalizar treino"
                 style="w-full text-white! bg-green-600! hover:bg-green-900! hover:text-white! mt-8"
