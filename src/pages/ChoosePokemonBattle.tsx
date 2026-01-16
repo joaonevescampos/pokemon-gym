@@ -82,17 +82,15 @@ const ChoosePokemonBattle = () => {
           </div>
         </section>
         {typeof selectedPokemonIndex === "number" ? (
-          <div>
-            <Button
-              text="Iniciar batalha!"
-              style="z-20! mb-12"
-              onClick={() =>
-                navigate(
-                  `/pokemon-battle/${param?.pokemonOponent}/${selectedPokemon?.name}`
-                )
-              }
-            />
-          </div>
+          <Button
+            text="Iniciar batalha!"
+            style="z-20! mb-24 mt-4"
+            onClick={() =>
+              navigate(
+                `/pokemon-battle/${param?.pokemonOponent}/${selectedPokemon?.name}`
+              )
+            }
+          />
         ) : (
           <div className="h-10"></div>
         )}
