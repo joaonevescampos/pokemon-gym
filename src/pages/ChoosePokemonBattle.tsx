@@ -15,6 +15,11 @@ const ChoosePokemonBattle = () => {
   const param = useParams();
   const navigate = useNavigate();
 
+  const selectedPokemon =
+    typeof selectedPokemonIndex === "number"
+      ? state.myPokemons[selectedPokemonIndex]
+      : null;
+
   const handleClick = (index: number) => {
     setSelectedPokemonIndex(index);
   };
@@ -43,7 +48,7 @@ const ChoosePokemonBattle = () => {
           <img
             src={florestImage}
             alt="florest"
-            className="absolute w-full h-full z-0 object-cover"
+            className="absolute w-full h-full z-0 object-cover pointer-events-none"
           />
           {imageURL && (
             <img
@@ -80,9 +85,10 @@ const ChoosePokemonBattle = () => {
           <div>
             <Button
               text="Iniciar batalha!"
+              style="z-20!"
               onClick={() =>
                 navigate(
-                  `/pokemon-battle/${param?.pokemonOponent}/${state.myPokemons[selectedPokemonIndex].name}`
+                  `/pokemon-battle/${param?.pokemonOponent}/${selectedPokemon?.name}`
                 )
               }
             />
