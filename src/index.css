@@ -1,23 +1,183 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-blue: #060B28;
-  --color-gd-orange: #E27E65;
-  --color-gd-blue: #21026C;
-  --color-bt-purple: #51099E;
-  --color-gd-eletric1: #D3CD1E;
-  --color-gd-eletric2: #7E5200;
-  --color-gd-water1: #09D3D3;
-  --color-gd-water2: #00014A;
-  --color-gd-fire1: #D49113;
-  --color-gd-fire2: #7B0B0B;
-  --color-gd-grass1: #0CF387;
-  --color-gd-grass2: #00542D;
+  --color-bg-blue: #060b28;
+  --color-gd-orange: #e27e65;
+  --color-gd-blue: #21026c;
+  --color-bt-purple: #51099e;
+  --color-gd-eletric1: #d3cd1e;
+  --color-gd-eletric2: #7e5200;
+  --color-gd-water1: #09d3d3;
+  --color-gd-water2: #00014a;
+  --color-gd-fire1: #d49113;
+  --color-gd-fire2: #7b0b0b;
+  --color-gd-grass1: #0cf387;
+  --color-gd-grass2: #00542d;
+
+  --animate-attack-down: attack-down 0.25s ease-in-out;
+  --animate-attack-up: attack-up 0.25s ease-in-out;
+  --animate-hit-left: hit-left 0.2s ease-out;
+  --animate-hit-right: hit-right 0.2s ease-out;
+  --animate-float: float 2.5s ease-in-out infinite;
+  --animate-pokeball-hit: pokeball-hit 3s ease-out;
+  --animate-circle-effect: circle-effect 0.3s ease-in-out;
+  --animate-pokeball-captured: pokeball-captured 8s ease-in-out;
+
+  @keyframes attack-down {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(300px) scale(1.3);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes attack-up {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-300px) scale(0.7);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes hit-left {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateX(-10px);
+      opacity: 0.85;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes hit-right {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateX(20px);
+      opacity: 0.85;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+      opacity: 20%;
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pokeball-hit {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+
+    40% {
+      transform: translateY(-400px) rotate(360deg);
+      opacity: 1;
+    }
+
+    60% {
+      transform: translateY(-320px) rotate(420deg);
+      opacity: 0.5;
+    }
+
+    100% {
+      transform: translateY(-300px) rotate(420deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes circle-effect {
+    0% {
+      scale: 1;
+      opacity: 50%;
+    }
+
+    40% {
+      scale: 4;
+      opacity: 90%;
+    }
+
+    60% {
+      scale: 2;
+      opacity: 40%;
+    }
+
+    100% {
+      scale: 0.1;
+      opacity: 0%;
+    }
+  }
+
+  @keyframes pokeball-captured {
+    0% {
+      opacity: 0;
+    }
+
+    40% {
+      transform: rotate(70deg);
+      opacity: 1;
+    }
+    50% {
+      transform: rotate(-60deg);
+      opacity: 1;
+    }
+
+    60% {
+      transform: rotate(50deg);
+      opacity: 1;
+    }
+
+    70% {
+      transform: rotate(-35deg);
+      opacity: 1;
+    }
+
+    80% {
+      transform: rotate(20deg);
+      opacity: 1;
+    }
+
+    90% {
+      transform: rotate(-10deg);
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
-html, body {
- background: linear-gradient(to bottom, #000000, #05091b);
- box-sizing: border-box;
- overflow-x: hidden;
- height: 100%;
+html,
+body {
+  background: linear-gradient(to bottom, #000000, #05091b);
+  box-sizing: border-box;
+  overflow-x: hidden;
+  height: 100%;
 }

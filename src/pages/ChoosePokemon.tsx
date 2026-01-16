@@ -15,7 +15,7 @@ const ChoosePokemon = () => {
     { name: "charmander", type: "fire", level: 0, selected: false },
     { name: "squirtle", type: "water", level: 0, selected: false },
   ]);
-  
+
   useEffect(() => {
     if (state.myPokemons.length > 0) {
       navigate("/home");
@@ -45,7 +45,6 @@ const ChoosePokemon = () => {
     setinactive(!oneSelected);
   }, [initialPokemons]);
 
-
   return (
     <>
       {state.myPokemons.length === 0 && (
@@ -69,7 +68,8 @@ const ChoosePokemon = () => {
                     Escolha seu pokemon inicial
                   </h1>
                   <p className="text-sm font-medium text-center">
-                    Escolha com sabedoria pois é irreversível e este pokémon vai seguir com você por um bom tempo!
+                    Escolha com sabedoria pois é irreversível e este pokémon vai
+                    seguir com você por um bom tempo!
                   </p>
                 </div>
               </section>

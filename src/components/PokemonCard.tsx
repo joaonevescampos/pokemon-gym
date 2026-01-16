@@ -5,6 +5,7 @@ interface PokemonCard {
   name: string;
   pokemonSelected?: string;
   buttonText: string;
+  buttonStyle?: string;
   level?: number;
   buttonPath?: string;
   inactive?: boolean;
@@ -15,6 +16,7 @@ const PokemonCard = ({
   name,
   pokemonSelected,
   buttonText,
+  buttonStyle,
   buttonPath,
   level,
   inactive,
@@ -116,6 +118,7 @@ const PokemonCard = ({
         path={buttonPath}
         inactive={inactive}
         onClick={buttonClick}
+        style={buttonStyle}
       />
     </section>
   );

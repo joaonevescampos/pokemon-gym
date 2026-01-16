@@ -1,11 +1,13 @@
-import './index.css'
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
-import Home from './pages/Home'
-import LandingPage from './pages/LandingPage'
-import ChoosePokemon from './pages/ChoosePokemon'
-import MyPokemons from './pages/MyPokemons'
-import PokemonDetail from './pages/PokemonDetail'
-import CapturePokemon from './pages/CapturePokemon'
+import "./index.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import LandingPage from "./pages/LandingPage";
+import ChoosePokemon from "./pages/ChoosePokemon";
+import MyPokemons from "./pages/MyPokemons";
+import PokemonDetail from "./pages/PokemonDetail";
+import ChoosePokemonBattle from "./pages/ChoosePokemonBattle";
+import PokemonBattle from "./pages/PokemonBattle ";
+import PokemonCataloge from "./pages/CapturePokemon";
 
 function AppRoutes() {
   return (
@@ -16,11 +18,17 @@ function AppRoutes() {
         <Route path="/choose-pokemon" element={<ChoosePokemon />} />
         <Route path="/my-pokemons" element={<MyPokemons />} />
         <Route path="/pokemon/:pokemonName" element={<PokemonDetail />} />
-        <Route path="/capture-pokemon" element={<CapturePokemon />} />
+        <Route path="/capture-pokemon" element={<PokemonCataloge />} />
+        <Route
+          path="/pokemon-battle/:pokemonOponent"
+          element={<ChoosePokemonBattle />}
+        />
+        <Route path="/pokemon-battle/:pokemonOponent/:pokemonChose" element={<PokemonBattle />} />
 
+        
       </Routes>
     </Router>
-  )
+  );
 }
 
-export default AppRoutes
+export default AppRoutes;

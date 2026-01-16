@@ -20,7 +20,7 @@ const captureLevels = [
   { level: "todos", color: "bg-white" },
 ];
 
-const CapturePokemon = () => {
+const PokemonCataloge = () => {
   const { state } = usePokemon();
 
   const [pokemonBaseList, setPokemonBaseList] = useState<BasePokemon[]>([]);
@@ -142,7 +142,7 @@ const CapturePokemon = () => {
                 name={pokemon.name}
                 buttonText="capturar"
                 level={0}
-                buttonPath={`/pokemon/${pokemon.name}`}
+                buttonPath={`/pokemon-battle/${pokemon.name}`}
                 inactive={false}
               />
             ))}
@@ -153,4 +153,4 @@ const CapturePokemon = () => {
   );
 };
 
-export default CapturePokemon;
+export default PokemonCataloge;
