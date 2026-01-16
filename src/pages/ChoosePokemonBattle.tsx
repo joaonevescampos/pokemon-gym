@@ -1,6 +1,6 @@
 import PokemonCard from "../components/PokemonCard";
 import florestImage from "../assets/florest.png";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
