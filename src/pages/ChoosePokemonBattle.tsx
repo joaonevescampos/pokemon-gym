@@ -84,7 +84,7 @@ const ChoosePokemonBattle = () => {
           ) : (
             <div className="h-10"></div>
           )}
-          {state ? (
+          {!state ? (
             <p className="text-red-300 text-center">Ocorreu um erro! Atualize a página e tente novamente!</p>
           ) : (<></>)}
         </section>
