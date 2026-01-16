@@ -85,7 +85,7 @@ const ChoosePokemonBattle = () => {
           <div>
             <Button
               text="Iniciar batalha!"
-              style="z-20!"
+              style="z-20! mb-12"
               onClick={() =>
                 navigate(
                   `/pokemon-battle/${param?.pokemonOponent}/${selectedPokemon?.name}`
