@@ -78,12 +78,15 @@ const ChoosePokemonBattle = () => {
             <div>
               <Button
                 text="Iniciar batalha!"
-                path={`/pokemon-battle/${param.pokemonOponent}/${state.myPokemons[selectedPokemonIndex].name}`}
+                path={`/pokemon-battle/${param?.pokemonOponent}/${state?.myPokemons[selectedPokemonIndex].name}`}
               />
             </div>
           ) : (
             <div className="h-10"></div>
           )}
+          {state ? (
+            <p className="text-red-300 text-center">Ocorreu um erro! Atualize a página e tente novamente!</p>
+          ) : (<></>)}
         </section>
       </main>
     </>
