@@ -1,6 +1,6 @@
 import PokemonCard from "../components/PokemonCard";
 import florestImage from "../assets/florest.png";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
@@ -13,6 +13,7 @@ const ChoosePokemonBattle = () => {
   >(undefined);
   const [imageURL, setImageURL] = useState("");
   const param = useParams();
+  const navigate = useNavigate();
 
   const handleClick = (index: number) => {
     setSelectedPokemonIndex(index);
@@ -78,15 +79,23 @@ const ChoosePokemonBattle = () => {
             <div>
               <Button
                 text="Iniciar batalha!"
-                path={`/pokemon-battle/${param?.pokemonOponent}/${state?.myPokemons[selectedPokemonIndex].name}`}
+                onClick={() =>
+                  navigate(
+                    `/pokemon-battle/${param?.pokemonOponent}/${state.myPokemons[selectedPokemonIndex].name}`
+                  )
+                }
               />
             </div>
           ) : (
             <div className="h-10"></div>
           )}
           {!state ? (
-            <p className="text-red-300 text-center">Ocorreu um erro! Atualize a página e tente novamente!</p>
-          ) : (<></>)}
+            <p className="text-red-300 text-center">
+              Ocorreu um erro! Atualize a página e tente novamente!
+            </p>
+          ) : (
+            <></>
+          )}
         </section>
       </main>
     </>
