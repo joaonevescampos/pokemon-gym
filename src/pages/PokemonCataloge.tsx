@@ -22,7 +22,6 @@ const captureLevels = [
 
 const PokemonCataloge = () => {
   const { state } = usePokemon();
-
   const [pokemonBaseList, setPokemonBaseList] = useState<BasePokemon[]>([]);
   const [pokemonFilteredList, setPokemonFilteredList] = useState<BasePokemon[]>([]);
 
@@ -40,12 +39,14 @@ const PokemonCataloge = () => {
             return null;
           }
 
+          // console.log(state.myPokemons)
+
           return {
             name: pokemon.name,
             level: 0,
             hp: 0,
             captureLevel: species.capture_rate,
-            captured: state.myPokemons?.includes(pokemon.name) ?? false,
+            captured: state.myPokemons?.some(p => p.name === pokemon.name) ?? false,
           };
         })
       );
@@ -99,27 +100,30 @@ const PokemonCataloge = () => {
             </Link>
           </div>
           <div className="absolute flex items-end gap-2 top-4 right-4">
-            <span className="text-sm font-bold opacity-70">x 0 </span>
+            <span className="text-sm font-bold opacity-70">x {state.userStatus.pokeball} </span>
             <img src={pokebola} alt="pokebola" width={28} />
           </div>
         </section>
         <section className="flex flex-col items-center justify-center w-full">
-          <div className="flex flex-col gap-4 items-center justify-center pt-12 max-w-150 max-lg:max-w-120">
+          <div className="flex flex-col gap-2 items-center justify-center pt-12 max-w-150 max-lg:max-w-120">
             <h1 className="text-2xl text-center font-extrabold">
-              Escolha o pokémon que deseja capturar
+              Pokedex
             </h1>
-            <p className="text-sm font-medium text-center">
-              Os pokémons são separados em níveis de captura.
+            <p className="text-sm font-medium text-center opacity-70">
+              1. Os pokémons são separados em níveis de captura.
+            </p>
+            <p className="text-sm font-medium text-center opacity-70">
+              2. Cada nível determina o grau de dificudade da batalha contra o
+              pokémon.
+            </p>
+            <p className="text-sm font-medium text-center mb-4 opacity-70">
+              3. Escolha um dos níveis e filtre os pokémons por nível de captura.
             </p>
             <h1 className="text-xl text-center font-extrabold">
               Níveis de captura
             </h1>
-            <p className="text-sm font-medium text-center">
-              Cada nível determina o grau de dificudade da batalha com o
-              pokémon.
-            </p>
           </div>
-          <ul className="flex gap-2 py-8">
+          <ul className="flex gap-2 py-4">
             {captureLevels.map((item, index) => (
               <li
                 className={`flex items-center justify-center h-6 w-14 rounded-3xl ${item.color} font-bold text-xs text-black cursor-pointer`}
@@ -140,10 +144,11 @@ const PokemonCataloge = () => {
               <PokemonCard
                 key={index}
                 name={pokemon.name}
-                buttonText="capturar"
+                buttonText={pokemon.captured ? "capturado" : "capturar"}
                 level={0}
-                buttonPath={`/pokemon-battle/${pokemon.name}`}
+                buttonPath={pokemon.captured ? "" : `/pokemon-battle/${pokemon.name}`}
                 inactive={false}
+                buttonStyle={pokemon.captured ? "pointer-events-none! bg-bt-purple! text-white" : ""}
               />
             ))}
           </div>

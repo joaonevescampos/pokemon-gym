@@ -2,6 +2,7 @@
 import type { PokemonState, PokemonAction } from "./pokemonTypes";
 
 export const initialPokemonState: PokemonState = {
+  userStatus : {pokeball : 0},
   myPokemons: [],
 };
 
@@ -11,12 +12,12 @@ function calculateLevel(hp: number) {
 
 export function pokemonReducer(
   state: PokemonState,
-  action: PokemonAction
+  action: PokemonAction,
 ): PokemonState {
   switch (action.type) {
     case "CAPTURE_POKEMON":
       const alreadyCaptured = state.myPokemons.some(
-        (p) => p.name === action.payload.name
+        (p) => p.name === action.payload.name,
       );
 
       if (alreadyCaptured) {
@@ -52,13 +53,29 @@ export function pokemonReducer(
         }),
       };
 
+    case "GAIN_POKEBALL":
+      return {
+        ...state,
+        userStatus: {
+          pokeball: state.userStatus.pokeball + action.payload.gain,
+        },
+      };
+
+    case "USE_POKEBALL":
+      return {
+        ...state,
+        userStatus: {
+          pokeball: state.userStatus.pokeball - action.payload.lose,
+        },
+      };
+
     case "EVOLVE_POKEMON":
       return {
         ...state,
         myPokemons: state.myPokemons.map((p) =>
           p.name === action.payload.name
             ? { ...p, name: action.payload.newName }
-            : p
+            : p,
         ),
       };
 

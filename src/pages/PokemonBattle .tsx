@@ -108,7 +108,6 @@ const PokemonBattle = () => {
 
       if (randomNumberToWin <= winRate) {
         setWonBattle(true);
-        console.log(param.pokemonOponent!, oponentType)
         capturePokemon(param.pokemonOponent!, oponentType);
       } else {
         setWonBattle(false);

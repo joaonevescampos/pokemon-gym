@@ -11,11 +11,7 @@ function loadState() {
 }
 
 export function PokemonProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(
-    pokemonReducer,
-    undefined,
-    loadState
-  );
+  const [state, dispatch] = useReducer(pokemonReducer, undefined, loadState);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -37,25 +33,20 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
     const newLevel = Math.floor(newHp / 10);
 
     // Evolui a cada 3 levels
-    if (
-      newLevel > previousLevel &&
-      newLevel % 3 === 0
-    ) {
+    if (newLevel > previousLevel && newLevel % 3 === 0) {
       const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`
+        `https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`,
       );
       const data = await response.json();
 
-      const evolvesTo =
-        data.evolution_chain?.url;
+      const evolvesTo = data.evolution_chain?.url;
 
       if (!evolvesTo) return;
 
       const chainResponse = await fetch(evolvesTo);
       const chainData = await chainResponse.json();
 
-      const nextEvolution =
-        chainData.chain.evolves_to?.[0]?.species?.name;
+      const nextEvolution = chainData.chain.evolves_to?.[0]?.species?.name;
 
       if (nextEvolution) {
         dispatch({
@@ -64,6 +55,14 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
         });
       }
     }
+  }
+
+  function gainPokeball(gain: number) {
+    dispatch({ type: "GAIN_POKEBALL", payload: { gain } });
+  }
+
+  function usePokeball(lose: number) {
+    dispatch({ type: "USE_POKEBALL", payload: { lose } });
   }
 
   function resetGame() {
@@ -76,6 +75,8 @@ export function PokemonProvider({ children }: { children: React.ReactNode }) {
         state,
         capturePokemon,
         gainHp,
+        gainPokeball,
+        usePokeball,
         resetGame,
       }}
     >

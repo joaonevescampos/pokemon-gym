@@ -15,6 +15,7 @@ const ChoosePokemon = () => {
     { name: "charmander", type: "fire", level: 0, selected: false },
     { name: "squirtle", type: "water", level: 0, selected: false },
   ]);
+  const {state} = usePokemon()
 
   // useEffect(() => {
   //   if (state.myPokemons.length > 0) {
@@ -56,7 +57,7 @@ const ChoosePokemon = () => {
               </Link>
             </div>
             <div className="absolute flex items-end gap-2 top-4 right-4">
-              <span className="text-sm font-bold opacity-70">x 0 </span>
+              <span className="text-sm font-bold opacity-70">x {state.userStatus.pokeball} </span>
               <img src={pokebola} alt="pokebola" width={28} />
             </div>
           </header>

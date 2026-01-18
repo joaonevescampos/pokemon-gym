@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { usePokemon } from "../context/usePokemon";
-
+import pokebola from "../assets/pokeball.png";
+import xIcon from "../assets/x.png";
 interface ChecklistType {
   task: string;
   checked: boolean;
 }
 
 const PokemonDetail = () => {
-  const { state, gainHp } = usePokemon();
+  const { state, gainHp, gainPokeball } = usePokemon();
   const pokemonName = useParams().pokemonName;
   const [pokemonImage, setpokemonImage] = useState("");
   const [pokemonData, setPokemonData] = useState({
@@ -22,7 +23,7 @@ const PokemonDetail = () => {
     { task: "escreva sua tarefa aqui", checked: false },
   ]);
   const [date, setDate] = useState("");
-  const navigate = useNavigate();
+  const [alert, setAlert] = useState(false);
 
   useEffect(() => {
     getPokemonInfos(pokemonName!);
@@ -74,7 +75,8 @@ const PokemonDetail = () => {
 
   const handleFinish = () => {
     gainHp(name!, 1);
-    navigate("/home");
+    gainPokeball(1)
+    setAlert(true)
   };
 
   const formatDate = () => {
@@ -209,6 +211,32 @@ const PokemonDetail = () => {
           )}
         </div>
       </section>
+       {alert && (
+          <div className="absolute h-full w-full bg-[#000000d3] z-20">
+            <div className="flex flex-col items-center justify-center gap-4 absolute top-1/2 left-1/2 -translate-1/2 z-30 w-full max-w-100 max-lg:max-w-72 h-fit bg-gray-900 text-white px-4 py-8 rounded-2xl">
+              <span
+                className="absolute top-2 right-2 cursor-pointer
+              "
+              onClick={() => setAlert(false)}
+              >
+                <img src={xIcon} alt="x" className="w-4"/>
+              </span>
+              <h1 className="font-bold text-xl text-center text-green-400">
+                Oba! Você ganhou +1 pokebola!
+              </h1>
+              <div className="flex items-end gap-2 top-4 right-4">
+                <span className="text-sm font-bold opacity-70">
+                  + 1
+                </span>
+                <img src={pokebola} alt="pokebola" width={28} />
+              </div>
+              <p className="text-sm text-center">
+                Com a pokebola, você pode batalhar contra um pokemon e capturá-lo para fazer parte do seu time!
+              </p>
+              <Button text="Capturar pokemons" path="/capture-pokemon" />
+            </div>
+          </div>
+        )}
     </main>
   );
 };

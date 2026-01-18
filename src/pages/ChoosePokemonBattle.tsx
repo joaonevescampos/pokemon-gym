@@ -4,16 +4,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
-// import { isNumberObject } from "util/types";
+import pokebola from "../assets/pokeball.png";
+import xIcon from "../assets/x.png";
+
 
 const ChoosePokemonBattle = () => {
-  const { state } = usePokemon();
+  const { state, usePokeball } = usePokemon();
   const [selectedPokemonIndex, setSelectedPokemonIndex] = useState<
     number | undefined
   >(undefined);
   const [imageURL, setImageURL] = useState("");
   const param = useParams();
   const navigate = useNavigate();
+  const [alert, setAlert] = useState(false);
+
+  // console.log(state)
 
   const selectedPokemon =
     typeof selectedPokemonIndex === "number"
@@ -29,10 +34,24 @@ const ChoosePokemonBattle = () => {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
       const data = await response.json();
       setImageURL(
-        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${data.id}.png`
+        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${data.id}.png`,
       );
     } catch (error) {
       console.log("cannot get pokemon image");
+    }
+  };
+
+  const startBattle = () => {
+    if (state.userStatus.pokeball === 0) {
+      setAlert(true);
+      console.log("proibido");
+    } else {
+      setAlert(false);
+      usePokeball(1);
+      navigate(
+        `/pokemon-battle/${param?.pokemonOponent}/${selectedPokemon?.name}`,
+      );
+      console.log("liberado");
     }
   };
 
@@ -43,8 +62,8 @@ const ChoosePokemonBattle = () => {
   }, []);
   return (
     <>
-      <main className="flex flex-col items-center justify-center h-screen max-lg:h-full max-lg:min-h-100 text-white">
-        <section className="relative w-full h-150 max-lg:h-80">
+      <main className="flex flex-col items-center justify-center h-full max-lg:h-full max-lg:min-h-100 text-white">
+        <section className="relative w-full h-72">
           <img
             src={florestImage}
             alt="florest"
@@ -85,14 +104,39 @@ const ChoosePokemonBattle = () => {
           <Button
             text="Iniciar batalha!"
             style="z-20! mb-24 mt-4"
-            onClick={() =>
-              navigate(
-                `/pokemon-battle/${param?.pokemonOponent}/${selectedPokemon?.name}`
-              )
-            }
+            onClick={() => startBattle()}
           />
         ) : (
           <div className="h-10"></div>
+        )}
+        {alert && (
+          <div className="absolute h-full w-full bg-[#000000d3] z-20">
+            <div className="flex flex-col items-center justify-center gap-4 absolute top-1/2 left-1/2 -translate-1/2 z-30 w-full max-w-100 max-lg:max-w-72 h-fit bg-gray-900 text-white px-4 py-8 rounded-2xl">
+              <span
+                className="absolute top-2 right-2 cursor-pointer
+              "
+              onClick={() => setAlert(false)}
+              >
+                <img src={xIcon} alt="x" className="w-4"/>
+              </span>
+              <h1 className="font-bold text-xl text-center">
+                Poxa, você não pode batalhar!
+              </h1>
+              <div className="flex items-end gap-2 top-4 right-4">
+                <span className="text-sm font-bold opacity-70">
+                  x {state.userStatus.pokeball}{" "}
+                </span>
+                <img src={pokebola} alt="pokebola" width={28} />
+              </div>
+              <p className="text-sm text-center">
+                Você não tem pokebolas para batalhar e capturar um novo pokemon!
+                Lamento muito! Para conseguir pokebolas você deve treinar seu
+                pokemon concluindo tarefas diárias. Com tempo, você irá ganhar
+                pokébolas e poderá batalhar!
+              </p>
+              <Button text="treinar pokemons" path="/my-pokemons" />
+            </div>
+          </div>
         )}
       </main>
     </>
