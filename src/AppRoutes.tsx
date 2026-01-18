@@ -7,7 +7,7 @@ import MyPokemons from "./pages/MyPokemons";
 import PokemonDetail from "./pages/PokemonDetail";
 import ChoosePokemonBattle from "./pages/ChoosePokemonBattle";
 import PokemonBattle from "./pages/PokemonBattle ";
-import PokemonCataloge from "./pages/CapturePokemon";
+import PokemonCataloge from "./pages/PokemonCataloge";
 
 function AppRoutes() {
   return (

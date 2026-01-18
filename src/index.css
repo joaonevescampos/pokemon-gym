@@ -20,8 +20,9 @@
   --animate-hit-right: hit-right 0.2s ease-out;
   --animate-float: float 2.5s ease-in-out infinite;
   --animate-pokeball-hit: pokeball-hit 3s ease-out;
-  --animate-circle-effect: circle-effect 0.3s ease-in-out;
+  --animate-circle-effect: circle-effect 0.5s ease-in-out;
   --animate-pokeball-captured: pokeball-captured 8s ease-in-out;
+  --animate-pokemon-scape: pokemon-scape 1s ease-out;
 
   @keyframes attack-down {
     0% {
@@ -173,6 +174,19 @@
     }
   }
 }
+
+  @keyframes pokemon-scape {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  
+    100% {
+      transform: translateX(150%);
+      opacity: 0.8;
+    }
+  }
+
 
 html,
 body {
