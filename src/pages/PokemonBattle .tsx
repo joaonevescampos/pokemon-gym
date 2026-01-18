@@ -59,7 +59,7 @@ const PokemonBattle = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsFighting(false);
-    }, 3000);
+    }, 12000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -115,7 +115,7 @@ const PokemonBattle = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowResult(true);
-    }, 12000);
+    }, 22000);
     return () => clearTimeout(timer);
   }, []);
 
