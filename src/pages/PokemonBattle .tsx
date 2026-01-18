@@ -11,9 +11,10 @@ import Button from "../components/Button";
 const PokemonBattle = () => {
   const [pokemonOponent, setPokemonOponent] = useState("");
   const [myPokemon, setMyPokemon] = useState("");
-  const { state } = usePokemon();
+  const { state, capturePokemon } = usePokemon();
   const [wonBattle, setWonBattle] = useState<boolean | undefined>(undefined);
   const [showResult, setShowResult] = useState(false);
+  const [oponentType, setOponentType] = useState("");
 
   const param = useParams();
 
@@ -79,6 +80,10 @@ const PokemonBattle = () => {
         `https://pokeapi.co/api/v2/pokemon/${param.pokemonOponent}`,
       );
       const data1 = await responseId.json();
+      console.log("data 1", data1);
+      console.log("TYPE api", data1.types[0].type.name);
+
+      setOponentType(data1.types[0].type.name);
       const responseCaptureRate: any = await fetch(
         `https://pokeapi.co/api/v2/pokemon-species/${data1.id}`,
       );
@@ -103,10 +108,11 @@ const PokemonBattle = () => {
 
       if (randomNumberToWin <= winRate) {
         setWonBattle(true);
+        console.log(param.pokemonOponent!, oponentType)
+        capturePokemon(param.pokemonOponent!, oponentType);
       } else {
         setWonBattle(false);
       }
-
     } catch (error) {
       console.log("Cannot get the pokemon oponent.");
     }
@@ -202,7 +208,7 @@ const PokemonBattle = () => {
                 alt=""
                 className={`w-36 h-36 z-20 mb-8`}
               />
-               <h1 className="text-2xl font-bold top-8 text-center z-50 text-green-400">
+              <h1 className="text-2xl font-bold top-8 text-center z-50 text-green-400">
                 Oba! Você capturou o {param.pokemonOponent?.toUpperCase()}!
               </h1>
               <p className="text-xl font-bold top-32 text-center ">
@@ -213,7 +219,6 @@ const PokemonBattle = () => {
               </p>
               <Button text="Ver meus pokemon" path="/my-pokemons" />
             </div>
-            
           )}
 
           {wonBattle === false && !isCapturing && showResult && (
@@ -238,7 +243,7 @@ const PokemonBattle = () => {
               <p className="text-sm top-32 text-center ">
                 Continue treinando seu pokemon para ter mais chances de captura.
               </p>
-              <Button text="Ver meus pokemon" path="/my-pokemons" />
+              <Button text="Capturar pokémon" path="/capture-pokemon" />
             </div>
           )}
         </section>

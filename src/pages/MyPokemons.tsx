@@ -2,13 +2,9 @@ import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
 import { Link } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
-// import { useEffect } from "react";
 
 const MyPokemons = () => {
   const { state } = usePokemon();
-  // useEffect(() => {
-  //   resetGame();
-  // }, []);
   return (
     <>
       <header className="relative w-full h-fit text-white">
@@ -36,7 +32,7 @@ const MyPokemons = () => {
         <section className="flex flex-col gap-2 p-4 opacity-70 text-sm">
           <span>Pokemons capturados: {state.myPokemons.length}</span>
           <span>Pokemons treinados até a última forma: 0</span>
-          <span>Total para serem capturados: {150 - state.myPokemons.length}</span>
+          <span>Total para serem capturados: {68 - state.myPokemons.length}</span>
           <hr className="opacity-40" />
         </section>
       </header>
