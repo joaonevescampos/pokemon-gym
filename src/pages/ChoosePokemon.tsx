@@ -16,11 +16,11 @@ const ChoosePokemon = () => {
     { name: "squirtle", type: "water", level: 0, selected: false },
   ]);
 
-  useEffect(() => {
-    if (state.myPokemons.length > 0) {
-      navigate("/home");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (state.myPokemons.length > 0) {
+  //     navigate("/home");
+  //   }
+  // }, []);
 
   const handleClick = (index: number) => {
     const updateSelection = initialPokemons.map((pokemon, i) =>
@@ -47,7 +47,7 @@ const ChoosePokemon = () => {
 
   return (
     <>
-      {state.myPokemons.length === 0 && (
+      {/* {state.myPokemons.length === 0 && ( */}
         <>
           <header className="relative w-full h-12 text-white">
             <div className="absolute flex items-end gap-2 top-4 left-4">
@@ -88,7 +88,7 @@ const ChoosePokemon = () => {
                     />
                   ))}
                 </div>
-                <div className="flex flex-col items-center justify-center gap-4 mb-8">
+                <div className="flex flex-col items-center justify-center gap-4 mb-16">
                   <Link to="/my-pokemons">
                     <Button
                       text="próximo"
@@ -106,7 +106,7 @@ const ChoosePokemon = () => {
             </div>
           </main>
         </>
-      )}
+      {/* )} */}
     </>
   );
 };
