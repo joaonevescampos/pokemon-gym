@@ -88,7 +88,7 @@ const ChoosePokemon = () => {
                     />
                   ))}
                 </div>
-                <div className="flex flex-col items-center justify-center gap-4">
+                <div className="flex flex-col items-center justify-center gap-4 mb-8">
                   <Link to="/my-pokemons">
                     <Button
                       text="próximo"
