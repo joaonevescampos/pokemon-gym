@@ -1,6 +1,6 @@
 // src/context/PokemonContext.tsx
 import { createContext } from "react";
-import type { PokemonState, UserStatus } from "./pokemonTypes";
+import type { PokemonState } from "./pokemonTypes";
 
 export type PokemonContextType = {
   state: PokemonState;
