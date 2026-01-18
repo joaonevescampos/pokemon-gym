@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import PokemonCard from "../components/PokemonCard";
 import pokebola from "../assets/pokeball.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { usePokemon } from "../context/usePokemon";
 
 const ChoosePokemon = () => {
-  const { state, capturePokemon } = usePokemon();
-  const navigate = useNavigate();
+  const {  capturePokemon } = usePokemon();
+  // const navigate = useNavigate();
   const [inactive, setinactive] = useState(true);
   const [initialPokemons, setInitialPokemons] = useState([
     { name: "pichu", type: "electric", level: 0, selected: false },
