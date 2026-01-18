@@ -60,7 +60,7 @@ const ChoosePokemon = () => {
               <img src={pokebola} alt="pokebola" width={28} />
             </div>
           </header>
-          <main className="flex flex-col items-center justify-center h-[calc(100vh-48px)] max-lg:h-full text-white">
+          <main className="flex flex-col items-center justify-center h-[calc(100vh-48px)] max-lg:h-full! text-white">
             <div className="flex flex-col gap-4">
               <section className="relative flex items-center justify-center w-full h-full pt-4">
                 <div className="flex flex-col gap-4 items-center justify-center p-4 max-w-150 max-lg:max-w-120">
